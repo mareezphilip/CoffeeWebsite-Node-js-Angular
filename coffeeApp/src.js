@@ -15,4 +15,7 @@ app.use("/users",userRoutes)
 const productRoutes = require("../routes/products.route")
 app.use("/products",productRoutes)
 
+const cartRoutes = require("../routes/cart.route")
+app.use("/carts",cartRoutes)
+
 module.exports = app

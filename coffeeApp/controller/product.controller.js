@@ -5,6 +5,7 @@ class product {
     static addproduct = async (req, res) => {
         try {
             console.log(req.file)
+            if(!req.file) { throw new Error (" add image ")}
             const ext = req.file.originalname.split('.').pop() // jpeg
             console.log(ext)
             const fileName = req.file.path + "." + ext
@@ -48,9 +49,72 @@ class product {
             resGenerator(res, 500, false, e.message, "error in show data")
         }
     }
+
+    static deleteproduct = async(req,res)=>{
+        
+        try{
+            await productModel.findByIdAndDelete(req.params.id)
+            resGenerator(res, 200, true, null, "product deleted")
+        }
+        catch (e) {
+            resGenerator(res, 500, false, e.message, "error in delete")
+        }
+  
+    }
+
+
+    static editProduct = async(req,res)=>{
+        try{
+            console.log(req.file)
+            if(req.file){
+            const ext = req.file.originalname.split('.').pop() // jpeg
+            console.log(ext)
+            const fileName = req.file.path + "." + ext
+
+            fs.renameSync(req.file.path, fileName)
+            const  newName= fileName.replace("public", "")
+            await productModel.findByIdAndUpdate(req.params.id ,{...req.body, images:newName}   )
+            //res.send(req.body)
+            }
+            else{
+                await productModel.findByIdAndUpdate(req.params.id ,req.body   )
+            }
+            resGenerator(res, 200, true, null, "product updated")
+        }
+        catch(e){
+            resGenerator(res, 500, false, e.message, "error in update product")
+        }
+    }
    
 
 
+
+
+
+    static showSingleProduct = async (req, res) => {
+        try {
+            const product = await productModel.findById(req.params.id)  // null
+            if (!product)
+                resGenerator(res, 404, false, product, "product not found")
+            resGenerator(res, 200, true, product, "produced showed")
+        }
+        catch (e) {
+            resGenerator(res, 500, false, e.message, "error in show product")
+        }
+    }
+
+
+    static searchByName = async(req , res) =>{
+        try{
+            
+            const products = await productModel.find({"title" : { "$regex": req.params.searchKey, "$options": "i" }})
+            resGenerator(res, 200, true, products, "produced showed")
+
+        }
+        catch{
+            resGenerator(res, 500, false, e.message, "error in show product")
+        }
+    }
 
 
 

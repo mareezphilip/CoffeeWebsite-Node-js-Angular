@@ -17,7 +17,7 @@ const cartSchema = mongoose.Schema({
                 required:true
             },
             quantity:{
-                type:number,
+                type:Number,
                 default:0
             }
         }
@@ -39,5 +39,5 @@ userSchema.virtual("myproducts", {
     foreignField:"cartid"
 })
 */
-const cartModel = mongoose.model("product",cartSchema)
+const cartModel = mongoose.model("cart",cartSchema)
 module.exports = cartModel
