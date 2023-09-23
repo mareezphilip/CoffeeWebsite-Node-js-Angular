@@ -21,16 +21,7 @@ class User {
             resGenerator(res, 500, false, e, "error in insert")
         }
     }
-  /*  static showAll = async (req, res) => {
-        try {
-            const userData = await userModel.find()
-            resGenerator(res, 200, true, userData, "data showed")
-        }
-        catch (e) {
-            resGenerator(res, 500, false, e, "error in show data")
-        }
-    }
-    */
+ 
 
     static showSingle = async (req, res) => {
         try {
@@ -43,17 +34,7 @@ class User {
             resGenerator(res, 500, false, e, "error in show data")
         }
     }
-    // static delSingle = async (req, res) => {
-    //     try {
-    //         const userData = await userModel.findByIdAndDelete(req.params.id)
-    //         if (!userData)
-    //             resGenerator(res, 404, false, userData, "User not found")
-    //         resGenerator(res, 200, true, userData, "data showed")
-    //     }
-    //     catch (e) {
-    //         resGenerator(res, 500, false, e.message, "error in show data")
-    //     }
-    // }
+   
     static editSingle = async (req, res) => {
         try {
             const allowedEdits = ["fName", "lName", "phone" ," dOfBirth"]
@@ -102,29 +83,21 @@ class User {
             resGenerator(res, 500, false, e.message, "error in show data")
         }
     }
-    // static delAllUsers = async(req,res)=>{
-    //     try{
-    //         await userModel.deleteMany()
-    //         resGenerator(res, 200, true, null, "logged out")
-    // }
-    // catch (e) {
-    //     resGenerator(res, 500, false, e.message, "error in show data")
-    // }
-    // }
+ 
 
     
-    static editProfile = async(req,res)=>{
-        try{
-            if(req.body.password) delete req.body.password
-           // res.send("test")
-           res.send(req.body)
-            await findByIdAndUpdate(req.user._id, req.body, {runValidators:true})
-            resGenerator(res, 200, true, null, "edit done")
-        }
-        catch (e) {
-            resGenerator(res, 500, false, e.message, "error in edit")
-        }
-    }
+    // static editProfile = async(req,res)=>{
+    //     try{
+    //         if(req.body.password) delete req.body.password
+    //        // res.send("test")
+    //        res.send(req.body)
+    //         await findByIdAndUpdate(req.user._id, req.body, {runValidators:true})
+    //         resGenerator(res, 200, true, null, "edit done")
+    //     }
+    //     catch (e) {
+    //         resGenerator(res, 500, false, e.message, "error in edit")
+    //     }
+    // }
 
     static addAddress = async(req, res)=>{
         try{

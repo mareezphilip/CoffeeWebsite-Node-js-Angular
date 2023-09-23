@@ -18,4 +18,7 @@ app.use("/products",productRoutes)
 const cartRoutes = require("../routes/cart.route")
 app.use("/carts",cartRoutes)
 
+
+const reviewRoutes = require("../routes/review.route")
+app.use("/review",reviewRoutes)
 module.exports = app
