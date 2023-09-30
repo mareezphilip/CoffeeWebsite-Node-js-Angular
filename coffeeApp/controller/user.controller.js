@@ -3,7 +3,7 @@ const { resGenerator, fileHandler } = require("../helper")
 class User {
     static adduser = async (req, res) => {
         try {
-            const userData = new userModel({...req.body, userType:"user"})
+            const userData = new userModel ({...req.body, userType:"user"})
             await userData.save()
             resGenerator(res, 200, true, userData, "data added")
         }
@@ -11,6 +11,9 @@ class User {
             resGenerator(res, 500, false, e, "error in insert")
         }
     }
+
+
+
     static addAdmin = async (req, res) => {
         try {
             const userData = new userModel({...req.body, userType:"admin"})
